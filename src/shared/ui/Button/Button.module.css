@@ -1,10 +1,14 @@
 .btn {
+  min-height: 40px;
   padding: 10px;
   border-radius: var(--rounded);
   font-weight: 600;
   border: none;
   cursor: pointer;
   transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn:disabled {

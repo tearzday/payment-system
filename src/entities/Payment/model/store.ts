@@ -22,6 +22,8 @@ export const usePaymentStore = create<IPaymentStore>((set) => ({
   loadData: async () => {
     set({ isLoading: true });
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       const [countriesData, paymentsData] = await Promise.all([
         getCountries(),
         getPaymentMethods(),

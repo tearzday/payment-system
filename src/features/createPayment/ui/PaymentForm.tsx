@@ -1,9 +1,10 @@
-import type { FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Selector } from '@/shared/ui/Selector/Selector';
 import { Button } from '@/shared/ui';
 import { useNavigate } from 'react-router';
 import { useCreatePaymentForm } from '../model/hooks/useCreatePaymentForm';
 import cls from './PaymentForm.module.css';
+import { Loader } from '@/shared/ui/Loader/Loader';
 
 export const PaymentForm = () => {
   const {
@@ -21,20 +22,27 @@ export const PaymentForm = () => {
     error,
   } = useCreatePaymentForm();
 
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    addPayment({
-      country: currentCountry,
-      currency: currentCurrency,
-      paymentMethod: currentPayment,
-    });
-    navigate('/payment-results');
+    setIsSubmitLoading(true);
+
+    setTimeout(() => {
+      addPayment({
+        country: currentCountry,
+        currency: currentCurrency,
+        paymentMethod: currentPayment,
+      });
+      setIsSubmitLoading(false);
+      navigate('/payment-results');
+    }, 1000);
   };
 
   if (isLoading) {
-    return <div>Загрузка...</div>;
+    return <Loader size="md" />;
   }
 
   if (error) {
@@ -42,7 +50,7 @@ export const PaymentForm = () => {
   }
 
   return (
-    <form onSubmit={submitHandler} className={cls.form}>
+    <form onSubmit={submitHandler} className={`${cls.form} ${isSubmitLoading ? cls.disabled : ''}`}>
       <Selector
         value={currentCountry}
         onChange={(e) => changeCountry(e.target.value)}
@@ -58,6 +66,7 @@ export const PaymentForm = () => {
         id="currency"
         label="Выберите валюту"
         options={currencyOptions}
+        disabled={!currentCountry}
       />
       <Selector
         value={currentPayment}
@@ -66,10 +75,11 @@ export const PaymentForm = () => {
         id="payment-method"
         label="Выберите метод оплаты"
         options={paymentOptions}
+        disabled={!currentCurrency}
       />
 
       <Button type="submit" disabled={!currentPayment}>
-        Создать выплату
+        {isSubmitLoading ? <Loader /> : 'Создать выплату'}
       </Button>
     </form>
   );

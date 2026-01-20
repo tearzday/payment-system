@@ -21,3 +21,8 @@
   background-color: var(--color-primary);
   color: var(--color-secondary);
 }
+
+.selector:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

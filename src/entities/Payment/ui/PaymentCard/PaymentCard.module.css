@@ -2,4 +2,5 @@
   padding: 20px;
   background-color: var(--color-accent);
   border-radius: var(--rounded);
+  width: 250px;
 }
