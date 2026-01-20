@@ -17,15 +17,16 @@ export const Selector = ({
   value,
   placeholder,
   options,
-  className,
   ...otherProps
 }: ISelectorProps) => {
   return (
-    <div className={className}>
-      <label htmlFor={id}>{label}</label>
+    <div className={cls.container}>
+      <label className={cls.label} htmlFor={id}>
+        {label}
+      </label>
       <select value={value || ''} className={cls.selector} name={id} id={id} {...otherProps}>
         {placeholder && (
-          <option value="" selected disabled>
+          <option className={cls.option} value="" selected disabled>
             {placeholder}
           </option>
         )}

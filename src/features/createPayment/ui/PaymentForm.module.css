@@ -1,0 +1,8 @@
+.form {
+  background-color: var(--color-accent);
+  padding: 20px;
+  border-radius: var(--rounded);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

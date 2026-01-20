@@ -1,3 +1,5 @@
+import cls from './PaymentCard.module.css';
+
 interface IPaymentCardProps {
   country: string;
   currency: string;
@@ -6,11 +8,10 @@ interface IPaymentCardProps {
 
 export const PaymentCard = ({ country, currency, paymentMethod }: IPaymentCardProps) => {
   return (
-    <div>
+    <div className={cls.card}>
       <p>Страна: {country}</p>
       <p>Валюта: {currency}</p>
       <p>Метод оплаты: {paymentMethod}</p>
-      <hr />
     </div>
   );
 };

@@ -1,14 +1,17 @@
 import { PaymentList } from '@/entities/Payment';
 import { Button } from '@/shared/ui';
 import { useNavigate } from 'react-router';
+import cls from './PaymentResultsPage.module.css';
 
 export const PaymentResultsPage = () => {
   const navigate = useNavigate();
   return (
-    <div>
-      PaymentResultsPage
+    <main className={cls.container}>
+      <h1 className={cls.title}>Результаты всех созданных выплат</h1>
       <PaymentList />
-      <Button onClick={() => navigate('/')}>Создать новую выплату</Button>
-    </div>
+      <Button onClick={() => navigate('/')} theme="btn--accent">
+        Создать новую выплату
+      </Button>
+    </main>
   );
 };

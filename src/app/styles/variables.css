@@ -1,4 +1,8 @@
 :root {
-  --color-primary: #000;
-  --color-secondary: #fff;
+  --color-primary: #181d24;
+  --color-secondary: #efefef;
+  --color-accent: #8b5cf6;
+
+  --rounded: 10px;
+  --transition: 0.3s;
 }

@@ -7,14 +7,9 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: ThemeButton;
 }
 
-export const Button = ({
-  children,
-  className,
-  theme = 'btn--primary',
-  ...otherProps
-}: IButtonProps) => {
+export const Button = ({ children, theme = 'btn--primary', ...otherProps }: IButtonProps) => {
   return (
-    <button className={`${cls.btn} ${cls[theme]} ${className}`} {...otherProps}>
+    <button className={`${cls.btn} ${cls[theme]}`} {...otherProps}>
       {children}
     </button>
   );
