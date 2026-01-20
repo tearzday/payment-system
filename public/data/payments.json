@@ -1,7 +1,7 @@
 {
-    "payments": [
-        { "currency": "USD", "paymentMethods": ["Bank Account", "PayPal"] },
-        { "currency": "EUR", "paymentMethods": ["SEPA Transfer", "Payoneer"] },
-        { "currency": "GBP", "paymentMethods": ["Wise", "UK Bank Transfer"] }
-    ]
+  "payments": [
+    { "currency": "USD", "paymentMethods": ["Bank Account", "PayPal"] },
+    { "currency": "EUR", "paymentMethods": ["SEPA Transfer", "Payoneer"] },
+    { "currency": "GBP", "paymentMethods": ["Wise", "UK Bank Transfer"] }
+  ]
 }

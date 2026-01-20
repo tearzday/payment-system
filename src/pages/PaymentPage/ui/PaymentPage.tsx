@@ -1,3 +1,4 @@
+import { PaymentForm } from '@/features/paymentForm';
 import { Button, Selector } from '@/shared/ui';
 
 export const PaymentPage = () => {
@@ -36,6 +37,7 @@ export const PaymentPage = () => {
         ]}
       />
       <Button onClick={() => console.log('btn')}>btn</Button>
+      <PaymentForm />
     </div>
   );
 };
