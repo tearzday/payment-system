@@ -12,7 +12,7 @@ interface IPaymentStore {
   loadData: () => Promise<void>;
 }
 
-export const usePaymentStore = create<IPaymentStore>((set) => ({
+export const usePaymentStore = create<IPaymentStore>((set, get) => ({
   payments: [],
   countries: [],
   paymentMethods: [],
@@ -20,6 +20,9 @@ export const usePaymentStore = create<IPaymentStore>((set) => ({
   error: null,
   addPayment: (payment: IPayment) => set((state) => ({ payments: [...state.payments, payment] })),
   loadData: async () => {
+    if (get().countries.length > 0 && get().paymentMethods.length > 0) {
+      return;
+    }
     set({ isLoading: true });
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));

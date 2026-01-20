@@ -26,7 +26,7 @@ export const Selector = ({
       </label>
       <select value={value || ''} className={cls.selector} name={id} id={id} {...otherProps}>
         {placeholder && (
-          <option className={cls.option} value="" selected disabled>
+          <option className={cls.option} value="" disabled>
             {placeholder}
           </option>
         )}
