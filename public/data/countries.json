@@ -1,0 +1,7 @@
+{
+    "countries": [
+        { "code": "US", "name": "США", "currency": "USD" },
+        { "code": "GB", "name": "Великобритания", "currency": "GBP" },
+        { "code": "DE", "name": "Германия", "currency": "EUR" }
+    ]
+}
