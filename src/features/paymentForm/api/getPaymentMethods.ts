@@ -1,6 +1,6 @@
 import type { PaymentMethods } from '../model/types';
 
-export async function getPayments(): Promise<PaymentMethods> {
+export async function getPaymentMethods(): Promise<PaymentMethods> {
   try {
     const res = await fetch('/data/payments.json');
     if (!res.ok) {

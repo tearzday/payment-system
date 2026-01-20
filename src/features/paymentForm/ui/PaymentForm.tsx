@@ -1,25 +1,32 @@
-import { useEffect, useMemo, useState } from 'react';
-import { getCountries, getPayments } from '../api';
+import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { getCountries, getPaymentMethods } from '../api';
 import type { Countries, PaymentMethods } from '../model/types';
 import { Selector } from '@/shared/ui/Selector/Selector';
+import { Button } from '@/shared/ui';
+import { useAddPayment, usePaymentsValue } from '../model/selectors';
 
 export const PaymentForm = () => {
   const [countries, setCountries] = useState<Countries>([]);
-  const [payments, setPayments] = useState<PaymentMethods>([]);
+  const [paymentMethods, setPaymentMethods] = useState<PaymentMethods>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const [currentCountry, setCurrentCountry] = useState<string>('');
   const [currentCurrency, setCurrentCurrency] = useState<string>('');
   const [currentPayment, setCurrentPayment] = useState<string>('');
+  const addPayment = useAddPayment();
+  const payment = usePaymentsValue();
 
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
       try {
-        const [countriesData, paymentsData] = await Promise.all([getCountries(), getPayments()]);
+        const [countriesData, paymentsData] = await Promise.all([
+          getCountries(),
+          getPaymentMethods(),
+        ]);
         setCountries(countriesData);
-        setPayments(paymentsData);
+        setPaymentMethods(paymentsData);
       } catch (err) {
         setError(`Ошибка загрузки данных, ${err}`);
       } finally {
@@ -56,13 +63,22 @@ export const PaymentForm = () => {
   }, [countries, currentCountry]);
 
   const paymentOptions = useMemo(() => {
-    const payment = payments.find((payment) => payment.currency === currentCurrency);
+    const payment = paymentMethods.find((payment) => payment.currency === currentCurrency);
     if (payment) {
       return payment.paymentMethods.map((method) => ({ value: method, text: method }));
     }
 
     return [];
-  }, [payments, currentCurrency]);
+  }, [paymentMethods, currentCurrency]);
+
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    addPayment({
+      country: currentCountry,
+      currency: currentCurrency,
+      paymentMethod: currentPayment,
+    });
+  };
 
   if (isLoading) {
     return <div>Загрузка...</div>;
@@ -73,31 +89,46 @@ export const PaymentForm = () => {
   }
 
   return (
-    <form>
-      <Selector
-        value={currentCountry}
-        onChange={(e) => changeCountry(e.target.value)}
-        placeholder="Страны"
-        id="country"
-        label="Выберите страну"
-        options={countryOptions}
-      />
-      <Selector
-        value={currentCurrency}
-        onChange={(e) => changeCurrency(e.target.value)}
-        placeholder="Валюты"
-        id="currency"
-        label="Выберите валюту"
-        options={currencyOptions}
-      />
-      <Selector
-        value={currentPayment}
-        onChange={(e) => setCurrentPayment(e.target.value)}
-        placeholder="Методы оплаты"
-        id="payment-method"
-        label="Выберите метод оплаты"
-        options={paymentOptions}
-      />
-    </form>
+    <>
+      <form onSubmit={submitHandler}>
+        <Selector
+          value={currentCountry}
+          onChange={(e) => changeCountry(e.target.value)}
+          placeholder="Страны"
+          id="country"
+          label="Выберите страну"
+          options={countryOptions}
+        />
+        <Selector
+          value={currentCurrency}
+          onChange={(e) => changeCurrency(e.target.value)}
+          placeholder="Валюты"
+          id="currency"
+          label="Выберите валюту"
+          options={currencyOptions}
+        />
+        <Selector
+          value={currentPayment}
+          onChange={(e) => setCurrentPayment(e.target.value)}
+          placeholder="Методы оплаты"
+          id="payment-method"
+          label="Выберите метод оплаты"
+          options={paymentOptions}
+        />
+
+        <Button type="submit" disabled={!currentPayment}>
+          Создать выплату
+        </Button>
+      </form>
+      {payment.length > 0 &&
+        payment.map((pay, index) => (
+          <div key={index}>
+            <p>Страна: {pay.country}</p>
+            <p>Валюта: {pay.currency}</p>
+            <p>Метод оплаты: {pay.paymentMethod}</p>
+            <hr />
+          </div>
+        ))}
+    </>
   );
 };
