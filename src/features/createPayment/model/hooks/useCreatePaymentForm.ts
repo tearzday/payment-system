@@ -66,6 +66,7 @@ export function useCreatePaymentForm() {
   }, [paymentMethods, currentCurrency]);
 
   return {
+    countries,
     currentCountry,
     setCurrentCountry,
     currentCurrency,

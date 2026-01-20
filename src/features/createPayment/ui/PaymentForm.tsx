@@ -8,6 +8,7 @@ import { Loader } from '@/shared/ui/Loader/Loader';
 
 export const PaymentForm = () => {
   const {
+    countries,
     currentCountry,
     currentCurrency,
     currentPayment,
@@ -34,11 +35,16 @@ export const PaymentForm = () => {
     setIsSubmitLoading(true);
 
     setTimeout(() => {
-      addPayment({
-        country: currentCountry,
-        currency: currentCurrency,
-        paymentMethod: currentPayment,
-      });
+      const country = countries.find((country) => country.code === currentCountry);
+
+      if (country) {
+        addPayment({
+          country: { name: country.name, code: country.code },
+          currency: currentCurrency,
+          paymentMethod: currentPayment,
+        });
+      }
+
       setIsSubmitLoading(false);
       navigate('/payment-results');
     }, 1000);

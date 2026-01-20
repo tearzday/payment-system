@@ -14,7 +14,7 @@ export const PaymentList = () => {
       {payments.map((pay, index) => (
         <PaymentCard
           key={index}
-          country={pay.country}
+          country={pay.country.name}
           currency={pay.currency}
           paymentMethod={pay.paymentMethod}
         />

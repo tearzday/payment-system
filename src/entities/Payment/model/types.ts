@@ -1,5 +1,10 @@
+interface IPaymentCountry {
+  name: string;
+  code: string;
+}
+
 export interface IPayment {
-  country: string;
+  country: IPaymentCountry;
   currency: string;
   paymentMethod: string;
 }
