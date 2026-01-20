@@ -1,0 +1,1 @@
+export { defaultFetch } from './defaultFetch';

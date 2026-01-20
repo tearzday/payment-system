@@ -1,15 +1,12 @@
-import type { Countries } from '../model/types';
+import { defaultFetch } from '@/shared/api/defaultFetch';
+import type { Countries, CountriesData } from '../model/types';
 
 export async function getCountries(): Promise<Countries> {
   try {
-    const res = await fetch('/data/countries.json');
-    if (!res.ok) {
-      throw new Error('Что-то пошло не так');
-    }
-    const data = await res.json();
+    const data = await defaultFetch<CountriesData>({ url: '/data/countries.json' });
     return data.countries;
   } catch (error) {
-    console.error(error);
-    throw error;
+    console.error(`Ошибка в getCountries: ${error}`);
+    throw new Error('Ошибка при получении стран');
   }
 }

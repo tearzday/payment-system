@@ -33,7 +33,7 @@ export const usePaymentStore = create<IPaymentStore>((set, get) => ({
       ]);
       set({ countries: countriesData, paymentMethods: paymentsData });
     } catch (err) {
-      set({ error: `Ошибка загрузки данных, ${err}` });
+      set({ error: (err as Error).message });
     } finally {
       set({ isLoading: false });
     }

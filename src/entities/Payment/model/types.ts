@@ -14,9 +14,17 @@ export interface ICountry {
 
 export type Countries = ICountry[];
 
+export type CountriesData = {
+  countries: Countries;
+};
+
 export interface IPaymentMethod {
   currency: string;
   paymentMethods: string[];
 }
 
 export type PaymentMethods = IPaymentMethod[];
+
+export type PaymentMethodsData = {
+  payments: PaymentMethods;
+};
