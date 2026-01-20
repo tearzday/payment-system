@@ -1,5 +1,6 @@
 import type { SelectHTMLAttributes } from 'react';
 import cls from './Selector.module.css';
+import { Loader } from '../Loader/Loader';
 
 interface ISelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
   id: string;
@@ -9,6 +10,7 @@ interface ISelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
     value: string;
     text: string;
   }>;
+  isLoading?: boolean;
 }
 
 export const Selector = ({
@@ -17,6 +19,7 @@ export const Selector = ({
   value,
   placeholder,
   options,
+  isLoading = false,
   ...otherProps
 }: ISelectorProps) => {
   return (
@@ -24,18 +27,24 @@ export const Selector = ({
       <label className={cls.label} htmlFor={id}>
         {label}
       </label>
-      <select value={value || ''} className={cls.selector} name={id} id={id} {...otherProps}>
-        {placeholder && (
-          <option className={cls.option} value="" disabled>
-            {placeholder}
-          </option>
-        )}
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.text}
-          </option>
-        ))}
-      </select>
+      {isLoading ? (
+        <div className={cls.loader}>
+          <Loader />
+        </div>
+      ) : (
+        <select value={value || ''} className={cls.selector} name={id} id={id} {...otherProps}>
+          {placeholder && (
+            <option className={cls.option} value="" disabled>
+              {placeholder}
+            </option>
+          )}
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 };

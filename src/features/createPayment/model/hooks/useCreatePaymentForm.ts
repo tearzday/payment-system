@@ -1,18 +1,37 @@
-import { usePaymentStore } from '@/entities/Payment';
+import { useCountryStore } from '@/entities/Country';
+import { usePaymentMethodsStore } from '@/entities/PaymentMethods';
 import { useEffect, useMemo, useState } from 'react';
+import { useAddPayment } from '@/entities/Payment';
 
 export function useCreatePaymentForm() {
-  const { countries, addPayment, paymentMethods, isLoading, error, loadData } = usePaymentStore();
+  const addPayment = useAddPayment();
+
+  const {
+    countries,
+    loadCountries,
+    isLoading: isLoadingCountries,
+    error: errorCountry,
+  } = useCountryStore();
+
+  const {
+    paymentMethods,
+    loadPaymentMethods,
+    isLoading: isLoadingPaymentMethods,
+    error: errorPaymentMethods,
+  } = usePaymentMethodsStore();
 
   useEffect(() => {
-    loadData();
-  }, [loadData]);
+    loadCountries();
+  }, [loadCountries]);
 
   const [currentCountry, setCurrentCountry] = useState<string>('');
   const [currentCurrency, setCurrentCurrency] = useState<string>('');
   const [currentPayment, setCurrentPayment] = useState<string>('');
 
   const changeCountry = (countryCode: string) => {
+    if (paymentMethods.length === 0) {
+      loadPaymentMethods();
+    }
     setCurrentCountry(countryCode);
     setCurrentCurrency('');
     setCurrentPayment('');
@@ -59,7 +78,8 @@ export function useCreatePaymentForm() {
     currencyOptions,
     paymentOptions,
     addPayment,
-    isLoading,
-    error,
+    isLoadingCountries,
+    isLoadingPaymentMethods,
+    errors: { errorCountry, errorPaymentMethods },
   };
 }

@@ -5,26 +5,3 @@ export interface IPayment {
 }
 
 export type Payments = IPayment[];
-
-export interface ICountry {
-  code: string;
-  name: string;
-  currency: Array<string>;
-}
-
-export type Countries = ICountry[];
-
-export type CountriesData = {
-  countries: Countries;
-};
-
-export interface IPaymentMethod {
-  currency: string;
-  paymentMethods: string[];
-}
-
-export type PaymentMethods = IPaymentMethod[];
-
-export type PaymentMethodsData = {
-  payments: PaymentMethods;
-};

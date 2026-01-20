@@ -26,3 +26,15 @@
   opacity: 0.6;
   pointer-events: none;
 }
+
+.loader {
+  height: 43px;
+  width: 200px;
+  border-radius: var(--rounded);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-secondary);
+  opacity: 0.6;
+  pointer-events: none;
+}

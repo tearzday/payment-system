@@ -18,9 +18,12 @@ export const PaymentForm = () => {
     currencyOptions,
     paymentOptions,
     addPayment,
-    isLoading,
-    error,
+    isLoadingCountries,
+    isLoadingPaymentMethods,
+    errors,
   } = useCreatePaymentForm();
+
+  const { errorCountry, errorPaymentMethods } = errors;
 
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
@@ -41,12 +44,13 @@ export const PaymentForm = () => {
     }, 1000);
   };
 
-  if (isLoading) {
+  if (isLoadingCountries) {
     return <Loader size="md" />;
   }
 
-  if (error) {
-    return <div>{error}</div>;
+  if (errorCountry || errorPaymentMethods) {
+    const message = errors.errorCountry ?? errors.errorPaymentMethods;
+    return <div>{message}</div>;
   }
 
   return (
@@ -67,6 +71,7 @@ export const PaymentForm = () => {
         label="Выберите валюту"
         options={currencyOptions}
         disabled={!currentCountry}
+        isLoading={isLoadingPaymentMethods}
       />
       <Selector
         value={currentPayment}

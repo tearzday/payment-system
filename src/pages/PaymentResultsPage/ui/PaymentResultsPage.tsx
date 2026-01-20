@@ -1,7 +1,7 @@
-import { PaymentList } from '@/entities/Payment';
 import { Button } from '@/shared/ui';
 import { useNavigate } from 'react-router';
 import cls from './PaymentResultsPage.module.css';
+import { PaymentList } from '@/entities/Payment';
 
 export const PaymentResultsPage = () => {
   const navigate = useNavigate();
