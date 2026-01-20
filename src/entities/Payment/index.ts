@@ -1,2 +1,4 @@
 export { PaymentList } from './ui/PaymentList/PaymentList';
-export type { IPayment, Payments } from './model/types';
+export type { IPayment, Payments, Countries, PaymentMethods } from './model/types';
+export { getPaymentMethods, getCountries } from './api/';
+export { usePaymentsValue, useAddPayment } from './model/selectors';

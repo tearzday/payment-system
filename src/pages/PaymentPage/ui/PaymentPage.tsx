@@ -1,4 +1,4 @@
-import { PaymentForm } from '@/features/paymentForm';
+import { PaymentForm } from '@/features/createPayment';
 
 export const PaymentPage = () => {
   return (

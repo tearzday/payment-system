@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import { getCountries, getPaymentMethods } from '../api';
-import type { Countries, PaymentMethods } from '../model/types';
+import { getCountries, getPaymentMethods } from '@/entities/Payment';
+import type { Countries, PaymentMethods } from '@/entities/Payment';
 import { Selector } from '@/shared/ui/Selector/Selector';
 import { Button } from '@/shared/ui';
-import { useAddPayment } from '../model/selectors';
+import { useAddPayment } from '@/entities/Payment';
 import { useNavigate } from 'react-router';
 
 export const PaymentForm = () => {

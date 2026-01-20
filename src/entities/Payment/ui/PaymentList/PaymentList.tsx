@@ -1,4 +1,4 @@
-import { usePaymentsValue } from '@/features/paymentForm';
+import { usePaymentsValue } from '../../model/selectors';
 import { PaymentCard } from '../PaymentCard/PaymentCard';
 
 export const PaymentList = () => {
