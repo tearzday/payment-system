@@ -1,4 +1,4 @@
-import { usePaymentsStore } from './store';
+import { usePaymentStore } from './store';
 
-export const usePaymentsValue = () => usePaymentsStore((state) => state.payments);
-export const useAddPayment = () => usePaymentsStore((state) => state.addPayment);
+export const usePaymentsValue = () => usePaymentStore((state) => state.payments);
+export const useAddPayment = () => usePaymentStore((state) => state.addPayment);
