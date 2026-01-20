@@ -1,7 +1,6 @@
 import cls from './Button.module.css';
 import type { ButtonHTMLAttributes } from 'react';
 
-
 type ThemeButton = 'btn--primary' | 'btn--accent';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -5,6 +5,6 @@ import { AppRouter } from './app/providers/RouterProvider/index.ts';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-        <RouterProvider router={AppRouter} />
+    <RouterProvider router={AppRouter} />
   </StrictMode>,
 );

@@ -1,5 +1,3 @@
 export const PaymentResultsPage = () => {
-  return (
-    <div>PaymentResultsPage</div>
-  )
-}
+  return <div>PaymentResultsPage</div>;
+};

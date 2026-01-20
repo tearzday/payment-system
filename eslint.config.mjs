@@ -8,7 +8,9 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 
 export default [
-  { ignores: ['dist', 'node_modules'] },
+  {
+    ignores: ['dist', 'node_modules'],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -28,13 +30,20 @@ export default [
       prettier: prettierPlugin,
     },
     settings: {
-      react: { version: 'detect' },
+      react: {
+        version: 'detect',
+      },
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': [
+        'warn',
+        {
+          allowConstantExport: true,
+        },
+      ],
       'prettier/prettier': 'warn',
       ...prettierConfig.rules,
     },
