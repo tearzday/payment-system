@@ -1,4 +1,4 @@
-import { Selector } from "@/shared/ui"
+import { Button, Selector } from "@/shared/ui"
 
 export const PaymentPage = () => {
   return (
@@ -11,6 +11,7 @@ export const PaymentPage = () => {
         { value: "spider", text: "Spider" },
         { value: "goldfish", text: "Goldfish" }
       ]} />
+      <Button onClick={() => console.log('btn')}>btn</Button>
     </div>
   )
 }
