@@ -1,0 +1,9 @@
+@import url('./normalize.css');
+@import url('./variables.css');
+@import url('./fonts.css');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
