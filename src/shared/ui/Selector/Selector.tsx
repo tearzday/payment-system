@@ -14,6 +14,7 @@ interface ISelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
 export const Selector = ({
   id,
   label,
+  value,
   placeholder,
   options,
   className,
@@ -22,9 +23,9 @@ export const Selector = ({
   return (
     <div className={className}>
       <label htmlFor={id}>{label}</label>
-      <select className={cls.selector} name={id} id={id} {...otherProps}>
+      <select value={value || ''} className={cls.selector} name={id} id={id} {...otherProps}>
         {placeholder && (
-          <option value="" disabled hidden>
+          <option value="" selected disabled>
             {placeholder}
           </option>
         )}

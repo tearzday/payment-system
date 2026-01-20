@@ -1,7 +1,7 @@
 export interface ICountry {
   code: string;
   name: string;
-  currency: string;
+  currency: Array<string>;
 }
 
 export type Countries = ICountry[];
