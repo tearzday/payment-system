@@ -3,7 +3,8 @@ import { getCountries, getPaymentMethods } from '../api';
 import type { Countries, PaymentMethods } from '../model/types';
 import { Selector } from '@/shared/ui/Selector/Selector';
 import { Button } from '@/shared/ui';
-import { useAddPayment, usePaymentsValue } from '../model/selectors';
+import { useAddPayment } from '../model/selectors';
+import { useNavigate } from 'react-router';
 
 export const PaymentForm = () => {
   const [countries, setCountries] = useState<Countries>([]);
@@ -15,7 +16,8 @@ export const PaymentForm = () => {
   const [currentCurrency, setCurrentCurrency] = useState<string>('');
   const [currentPayment, setCurrentPayment] = useState<string>('');
   const addPayment = useAddPayment();
-  const payment = usePaymentsValue();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadData = async () => {
@@ -78,6 +80,7 @@ export const PaymentForm = () => {
       currency: currentCurrency,
       paymentMethod: currentPayment,
     });
+    navigate('/payment-results');
   };
 
   if (isLoading) {
@@ -120,15 +123,6 @@ export const PaymentForm = () => {
           Создать выплату
         </Button>
       </form>
-      {payment.length > 0 &&
-        payment.map((pay, index) => (
-          <div key={index}>
-            <p>Страна: {pay.country}</p>
-            <p>Валюта: {pay.currency}</p>
-            <p>Метод оплаты: {pay.paymentMethod}</p>
-            <hr />
-          </div>
-        ))}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { IPayment, Payments } from './types';
+import type { IPayment, Payments } from '@/entities/Payment';
 
 interface IPaymentStore {
   payments: Payments;
